@@ -25,7 +25,7 @@ COPY pyproject.toml uv.lock ./
 RUN dnf update -y && dnf install -y \
     nmap-ncat \
     postgresql \
-    && pip install --no-cache-dir "uv==0.11.6" \
+    && pip install --no-cache-dir "uv==0.11.9" \
     && uv sync --frozen --no-dev \
     && uv run uwsgi --build-plugin https://github.com/City-of-Helsinki/uwsgi-sentry \
     && mkdir -p /srv/app/static \
@@ -40,7 +40,8 @@ FROM appbase AS development
 
 ENV DEV_SERVER=1
 
-RUN uv sync --frozen --group dev
+RUN uv sync --frozen --group dev \
+    && chown -R default /opt/venv
 
 COPY . .
 
