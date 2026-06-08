@@ -33,7 +33,7 @@ dev = [
 
 [tool.uv]
 package = false
-exclude-newer = "1 week"
+exclude-newer = "10 weeks"
 
 [tool.ruff]
 target-version = "py312"
